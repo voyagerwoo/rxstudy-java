@@ -1,4 +1,4 @@
-package com.voyager.rxstudy;
+package com.voyager.rxstudy.e05;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
