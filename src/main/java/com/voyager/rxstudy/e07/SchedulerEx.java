@@ -8,9 +8,18 @@ import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class SchedulerEx {
+    public static void wait1Second() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         Publisher<Integer> pub = sub -> {
             sub.onSubscribe(new Subscription() {
@@ -18,10 +27,15 @@ public class SchedulerEx {
                 public void request(long l) {
                     log.debug("request");
                     sub.onNext(1);
+                    wait1Second();
                     sub.onNext(2);
+                    wait1Second();
                     sub.onNext(3);
+                    wait1Second();
                     sub.onNext(4);
+                    wait1Second();
                     sub.onNext(5);
+                    wait1Second();
                     sub.onComplete();
                 }
 
@@ -100,7 +114,8 @@ public class SchedulerEx {
 
 
 //        subOnPub.subscribe(new Subscriber<Integer>() {
-        pubOnPub.subscribe(new DefaultLogSubscriber());
+        subOnPub.subscribe(new DefaultLogSubscriber());
+        subOnPub.subscribe(new DefaultLogSubscriber());
         log.debug("main thread done");
     }
 }

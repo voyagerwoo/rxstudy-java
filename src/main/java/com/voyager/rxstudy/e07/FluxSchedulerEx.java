@@ -12,19 +12,21 @@ import java.util.concurrent.TimeUnit;
 public class FluxSchedulerEx {
     public static void main(String[] args) throws InterruptedException {
         /* publishOn & subscribeOn Test */
-//        Flux.range(1, 10)
-//               .publishOn(Schedulers.newSingle("pub")) //컨슈머가 느릴 경우
+        Flux<Integer> pub = Flux.range(1, 10)
+                .publishOn(Schedulers.newSingle("pub")) //컨슈머가 느릴 경우
 //                .log()
-//                .subscribeOn(Schedulers.newSingle("sub")) //퍼블리셔가 느릴 경우
-//                .subscribe(System.out::println);
-//        System.out.println("exit");
+                .subscribeOn(Schedulers.newParallel("sub"));//퍼블리셔가 느릴 경우
+        pub.subscribe(System.out::println); //sout subscriber
+        pub.subscribe(s -> log.debug(s.toString())); //slf4j subscriber
+        System.out.println("exit");
+
 
         /* Flux interval Test */
-        Flux.interval(Duration.ofMillis(200))
-                .take(10)
-                .subscribe(s -> log.debug("onNext: {}", s));
-        log.debug("exit");
-        TimeUnit.SECONDS.sleep(5);
+//        Flux.interval(Duration.ofMillis(200))
+//                .take(10)
+//                .subscribe(s -> log.debug("onNext: {}", s));
+//        log.debug("exit");
+//        TimeUnit.SECONDS.sleep(5);
 
 
         /* User Thread Test */
