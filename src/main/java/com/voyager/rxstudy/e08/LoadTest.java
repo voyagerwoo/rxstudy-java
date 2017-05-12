@@ -14,21 +14,21 @@ public class LoadTest {
     static AtomicInteger counter = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException {
-//        loadTest("http://localhost:7070/callable");
-//        loadTest("http://localhost:7070/noncallable");
-        loadTest("http://localhost:7070/dr");
+        loadTest("http://localhost:7070/callable");
+        //loadTest("http://localhost:7070/noncallable");
+        //loadTest("http://localhost:7070/dr");
 
     }
 
     private static void loadTest(String url) throws InterruptedException {
-        ExecutorService es = Executors.newFixedThreadPool(100);
+        ExecutorService es = Executors.newFixedThreadPool(1000);
 
         RestTemplate rt = new RestTemplate();
 
         StopWatch main = new StopWatch();
         main.start();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             es.execute(() -> {
                 int idx = counter.addAndGet(1);
                 StopWatch sw = new StopWatch();
