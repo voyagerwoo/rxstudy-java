@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-public class E06JavaApplication {
+public class E06Application {
 
 	@RestController
 	public static class Controller {
@@ -36,6 +36,6 @@ public class E06JavaApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(E06JavaApplication.class, args);
+		SpringApplication.run(E06Application.class, args);
 	}
 }

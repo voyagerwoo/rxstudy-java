@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -27,8 +28,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @SpringBootApplication
 @EnableAsync
-public class E08JavaWebApplication {
-
+public class E08Application {
     @RestController
     public static class MyController {
         @RequestMapping("/callable")
@@ -138,6 +138,6 @@ public class E08JavaWebApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(E08JavaWebApplication.class, args);
+        SpringApplication.run(E08Application.class, args);
     }
 }
