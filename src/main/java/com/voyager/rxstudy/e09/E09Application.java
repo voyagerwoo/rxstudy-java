@@ -26,6 +26,8 @@ import java.util.concurrent.Future;
 public class E09Application {
 	@RestController
 	static class Controller {
+		// RestTemplate -> AsyncRestTemplate + DeferredResult -> AsyncRestTemplate with Netty\
+		// 의존성을 가진 여러서비스에 동시에 통신
 		AsyncRestTemplate rt = new AsyncRestTemplate(new Netty4ClientHttpRequestFactory(new NioEventLoopGroup(1)));
 
 		@Autowired MyService myService;
@@ -37,7 +39,6 @@ public class E09Application {
 
 			lf1.addCallback(s-> {
 				ListenableFuture<ResponseEntity<String>> lf2 = rt.getForEntity("http://localhost:7071/service2?req={req}", String.class, "Hello" + s.getBody());
-
 				lf2.addCallback(s2-> {
 					ListenableFuture<String> lf3 = myService.work(s2.getBody());
 					lf3.addCallback(s3-> {
@@ -61,7 +62,7 @@ public class E09Application {
 	ThreadPoolTaskExecutor myThreadPool() {
 		ThreadPoolTaskExecutor te = new ThreadPoolTaskExecutor();
 		te.setCorePoolSize(1);
-		te.setMaxPoolSize(10);
+		te.setMaxPoolSize(1);
 		te.initialize();
 		return te;
 	}

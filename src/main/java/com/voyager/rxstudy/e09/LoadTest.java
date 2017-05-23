@@ -9,14 +9,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 public class LoadTest {
-    static AtomicInteger counter = new AtomicInteger(0);
-
     public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
         loadTest("http://localhost:7070/rest?idx={idx}");
 
     }
 
     private static void loadTest(String url) throws InterruptedException, BrokenBarrierException {
+        AtomicInteger counter = new AtomicInteger(0);
         ExecutorService es = Executors.newFixedThreadPool(100);
         CyclicBarrier barrier = new CyclicBarrier(101);
         RestTemplate rt = new RestTemplate();

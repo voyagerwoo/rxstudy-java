@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 public class LoadTest {
-    static AtomicInteger counter = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException {
         loadTest("http://localhost:7070/callable");
@@ -21,6 +20,7 @@ public class LoadTest {
     }
 
     private static void loadTest(String url) throws InterruptedException {
+        AtomicInteger counter = new AtomicInteger(0);
         ExecutorService es = Executors.newFixedThreadPool(1000);
 
         RestTemplate rt = new RestTemplate();
