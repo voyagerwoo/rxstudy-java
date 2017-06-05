@@ -1,4 +1,4 @@
-package com.voyager.rxstudy.e10;
+package vw.rxstudy.e10;
 
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.NoArgsConstructor;

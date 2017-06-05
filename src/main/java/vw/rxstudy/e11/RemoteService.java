@@ -1,4 +1,4 @@
-package com.voyager.rxstudy.e09;
+package vw.rxstudy.e11;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +10,12 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 public class RemoteService {
 	@RestController
-	static class Controller {
+	static class RemoteController {
 		@GetMapping("/service")
 		public String service(String req) throws Exception {
 			TimeUnit.SECONDS.sleep(2);
-			return req + "/service";
+//			throw new RuntimeException();
+			return req + "/service1";
 		}
 
 		@GetMapping("/service2")

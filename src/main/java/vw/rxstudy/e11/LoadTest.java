@@ -1,4 +1,4 @@
-package com.voyager.rxstudy.e11;
+package vw.rxstudy.e11;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
